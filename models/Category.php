@@ -1,18 +1,14 @@
 <?php
 
-    class Post
+    class Category
     {
         // DB stuff
         private $conn;
-        private $table = 'posts';
+        private $table = 'categories';
 
         // Post Properties
         public $id;
-        public $category_id;
-        public $category_name;
-        public $title;
-        public $body;
-        public $author;
+        public $name;
         public $created_at;
 
         // Constructor with DB
@@ -26,19 +22,13 @@
         {
             // Get query
             $query = 'SELECT 
-            c.name as category_name,
-            p.id,
-            p.category_id,
-            p.title,
-            p.body,
-            p.author,
-            p.created_at
+            id,
+            name,
+            created_at
             FROM 
-            ' . $this->table . ' p 
-            LEFT JOIN
-                categories c ON p.category_id = c.id
+            ' . $this->table . '  
             ORDER BY 
-                p.created_at DESC';
+            created_at';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
